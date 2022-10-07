@@ -15,6 +15,9 @@ var finalY = 0
 var showTempNote = false
 var url = "https://getpantry.cloud/apiv1/pantry/6c480062-871b-45c3-b5cd-4907e771040b/basket/Posts"
 var http = new XMLHttpRequest
+
+const colorTable = ["Yellow","Blue","Green","Red","Purple"]
+var currentColorValue = 0
 http.open('GET',url)
 http.onload = function() {
   let response = JSON.parse(http.responseText)
@@ -23,6 +26,7 @@ http.onload = function() {
     let text = document.createElement("pre")
     text.disabled = true
     text.innerText = response.Posts[i].Content
+    post.style.backgroundImage = `url('stickynote${response.Posts[i].Color}.png')`
     post.style.left = `${response.Posts[i].X}px`
     post.style.top = `${response.Posts[i].Y}px`
     post.style.transform = `rotate(${response.Posts[i].Rotation}deg)`
@@ -89,22 +93,21 @@ document.addEventListener('keydown', (event) => {
     let posts = document.body.getElementsByTagName("div")
     let rnd = getRndInteger(0,posts.length)
     for (let i = 0; i < posts.length; i++) {
-    	posts[i].style.backgroundImage = "url('stickynote.png')"
-      	posts[i].style.zIndex = 50
+      posts[i].style.zIndex = 50
     }
     posts[rnd].scrollIntoView({
       behavior: 'auto',
       block: 'center',
       inline: 'center'
     });
-    posts[rnd].style.backgroundImage = "url('stickynoteSelected.png')"
     posts[rnd].style.zIndex = 55
   }
 })
-currentText = ""
-setInterval(()=>{
-  currentText = tempText.value
-},1)
+document.addEventListener('keydown', (event) => {
+  if (event.key == "c" && tempText != document.activeElement) {
+    currentColorValue = (currentColorValue+1)
+  }
+})
 document.addEventListener('keydown', (event) => {
   if (event.key == "Enter" && showTempNote == true && tempText != document.activeElement) {
     http.open('GET',url)
@@ -116,6 +119,7 @@ document.addEventListener('keydown', (event) => {
         "X": finalX-210,
         "Y": finalY-170,
         "Rotation": rotation,
+        "Color": colorTable[currentColorValue%colorTable.length]
         },
       )
       console.log(JSON.stringify(response))
@@ -140,6 +144,7 @@ function updateTempNote() {
   tempPost.style.transform = `rotate(${rotation}deg)`
   tempPost.style.top = `${finalY-170}px`
   tempPost.style.left = `${finalX-210}px`
+  tempPost.style.backgroundImage = `url('stickynote${colorTable[currentColorValue%colorTable.length]}.png')`
 }
 
 
