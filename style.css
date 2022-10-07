@@ -14,8 +14,6 @@ body {
   border-image-repeat: repeat;
   border-image-outset: 10px;
   border-image-width: 40px;
-  max-width: 1000%;
-  max-height: 1000%;
 }
 textarea, pre {
   transform: rotate(4deg);
@@ -26,7 +24,6 @@ textarea, pre {
   opacity: 0.9;
   width: 200px;
   height: 200px;
-  overflow: scroll;
   resize: none;
   background-color: transparent;
   border: transparent;
@@ -47,7 +44,6 @@ div {
   background-image: url("stickynote.png");
   background-size: cover;
   opacity: 1;
-  overflow: hidden;
   z-index: 50;
 }
 textarea::-webkit-scrollbar {
