@@ -88,6 +88,10 @@ document.addEventListener('keydown', (event) => {
   if (event.key == "f" && tempText != document.activeElement) {
     let posts = document.body.getElementsByTagName("div")
     let rnd = getRndInteger(0,posts.length)
+    for (let i = 0; i < posts.length; i++) {
+    	posts[i].style.backgroundImage = "url('stickynote.png')"
+      	posts[i].style.zIndex = 50
+    }
     posts[rnd].scrollIntoView({
       behavior: 'auto',
       block: 'center',
@@ -95,10 +99,6 @@ document.addEventListener('keydown', (event) => {
     });
     posts[rnd].style.backgroundImage = "url('stickynoteSelected.png')"
     posts[rnd].style.zIndex = 55
-    setTimeout(()=>{
-      posts[rnd].style.backgroundImage = "url('stickynote.png')"
-      posts[rnd].style.zIndex = 50
-    },1000)
   }
 })
 currentText = ""
