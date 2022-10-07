@@ -20,7 +20,7 @@ http.onload = function() {
   let response = JSON.parse(http.responseText)
   for (let i = 0; i < response.Posts.length; i++) {
     let post = document.createElement("div")
-    let text = document.createElement("textarea")
+    let text = document.createElement("pre")
     text.disabled = true
     text.innerText = response.Posts[i].Content
     post.style.left = `${response.Posts[i].X}px`
@@ -94,9 +94,11 @@ document.addEventListener('keydown', (event) => {
       inline: 'center'
     });
     posts[rnd].style.backgroundImage = "url('stickynoteSelected.png')"
+    posts[rnd].style.zIndex = 55
     setTimeout(()=>{
       posts[rnd].style.backgroundImage = "url('stickynote.png')"
-    },5000)
+      posts[rnd].style.zIndex = 50
+    },1000)
   }
 })
 currentText = ""
