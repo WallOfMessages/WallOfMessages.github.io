@@ -17,7 +17,7 @@ body {
   max-width: 1000%;
   max-height: 1000%;
 }
-textarea {
+textarea, pre {
   transform: rotate(4deg);
   margin-top: 80px;
   margin-left: 130px;
@@ -48,8 +48,11 @@ div {
   background-size: cover;
   opacity: 1;
   overflow: hidden;
-  
+  z-index: 50;
 }
 textarea::-webkit-scrollbar {
+  display: none;
+}
+pre::-webkit-scrollbar {
   display: none;
 }
