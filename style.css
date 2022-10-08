@@ -60,3 +60,6 @@ textarea::-webkit-scrollbar {
 pre::-webkit-scrollbar {
   display: none;
 }
+a {
+  display: none;
+}
