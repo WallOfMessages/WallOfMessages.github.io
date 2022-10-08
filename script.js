@@ -1,6 +1,8 @@
 var x = 0
 var y = 0
 //6c480062-871b-45c3-b5cd-4907e771040b
+
+//MAKE A BACKUP BEFORE YOU DO SHIT
 var tempPost = document.createElement("div")
 var tempText = document.createElement("textarea")
 
