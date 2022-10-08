@@ -1,11 +1,9 @@
 var x = 0
 var y = 0
 //6c480062-871b-45c3-b5cd-4907e771040b
-
-//MAKE A BACKUP BEFORE YOU DO SHIT
 var tempPost = document.createElement("div")
 var tempText = document.createElement("textarea")
-
+//PTdsdvAies
 var lastX = 0
 var lastY = 0
 
@@ -15,23 +13,25 @@ var finalX = 0
 var finalY = 0
 
 var showTempNote = false
-var url = "https://getpantry.cloud/apiv1/pantry/6c480062-871b-45c3-b5cd-4907e771040b/basket/Posts"
+var url = "https://api.jsonbin.io/v3/b/6341a84f65b57a31e68f790f"
 var http = new XMLHttpRequest
 
 const colorTable = ["Yellow","Blue","Green","Red","Purple"]
 var currentColorValue = 0
 http.open('GET',url)
+http.setRequestHeader("X-Master-Key","$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2")
 http.onload = function() {
   let response = JSON.parse(http.responseText)
-  for (let i = 0; i < response.Posts.length; i++) {
+  console.log(response)
+  for (let i = 0; i < response.record.Posts.length; i++) {
     let post = document.createElement("div")
     let text = document.createElement("pre")
     text.disabled = true
-    text.innerText = response.Posts[i].Content
-    post.style.backgroundImage = `url('stickynote${response.Posts[i].Color}.png')`
-    post.style.left = `${response.Posts[i].X}px`
-    post.style.top = `${response.Posts[i].Y}px`
-    post.style.transform = `rotate(${response.Posts[i].Rotation}deg)`
+    text.innerText = response.record.Posts[i].Content
+    post.style.backgroundImage = `url('stickynote${response.record.Posts[i].Color}.png')`
+    post.style.left = `${response.record.Posts[i].X}px`
+    post.style.top = `${response.record.Posts[i].Y}px`
+    post.style.transform = `rotate(${response.record.Posts[i].Rotation}deg)`
     document.body.appendChild(post)
     post.appendChild(text)
   }
@@ -113,10 +113,12 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key == "Enter" && showTempNote == true && tempText != document.activeElement) {
     http.open('GET',url)
+    http.setRequestHeader("X-Master-Key","$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2")
     http.setRequestHeader("Content-Type", "application/json");
     http.onload = function() {
       let response = JSON.parse(this.responseText)
-      response.Posts.push({
+      let posts = response.record.Posts
+      posts.push({
         "Content": tempText.value,
         "X": finalX-210,
         "Y": finalY-170,
@@ -124,13 +126,15 @@ document.addEventListener('keydown', (event) => {
         "Color": colorTable[currentColorValue%colorTable.length]
         },
       )
+      posts = {"Posts":posts}
       console.log(JSON.stringify(response))
-      http.open('POST',url)
+      http.open('PUT',url)
       http.setRequestHeader("Content-Type", "application/json");
+      http.setRequestHeader("X-Master-Key","$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2")
       http.onload=function(){
         console.log(http.responseText)
       }
-      http.send(JSON.stringify(response))
+      http.send(JSON.stringify(posts))
       tempText.disabled = true
       tempPost = document.createElement("div")
       tempText = document.createElement("textarea")
