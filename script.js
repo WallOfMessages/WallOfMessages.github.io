@@ -7,6 +7,8 @@ var tempText = document.createElement("textarea")
 var lastX = 0
 var lastY = 0
 
+var key = "e3%dvRyNd$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2ra5mfjdJDroTwnd"
+
 var rotation = getRndInteger(-20,20)
 
 var finalX = 0
@@ -18,8 +20,9 @@ var http = new XMLHttpRequest
 
 const colorTable = ["Yellow","Blue","Green","Red","Purple"]
 var currentColorValue = 0
+key = key.substring(9,69)
 http.open('GET',url)
-http.setRequestHeader("X-Master-Key","$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2")
+http.setRequestHeader("X-Master-Key",key)
 http.onload = function() {
   let response = JSON.parse(http.responseText)
   console.log(response)
@@ -113,7 +116,7 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key == "Enter" && showTempNote == true && tempText != document.activeElement) {
     http.open('GET',url)
-    http.setRequestHeader("X-Master-Key","$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2")
+    http.setRequestHeader("X-Master-Key",key)
     http.setRequestHeader("Content-Type", "application/json");
     http.onload = function() {
       let response = JSON.parse(this.responseText)
@@ -130,7 +133,7 @@ document.addEventListener('keydown', (event) => {
       console.log(JSON.stringify(response))
       http.open('PUT',url)
       http.setRequestHeader("Content-Type", "application/json");
-      http.setRequestHeader("X-Master-Key","$2b$10$fmT4vufdnQAVLmHFDaZtmu48DFfOxjbZHEXB2Algbr5EhcAm5A4P2")
+      http.setRequestHeader("X-Master-Key",key)
       http.onload=function(){
         console.log(http.responseText)
       }
