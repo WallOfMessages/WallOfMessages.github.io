@@ -65,14 +65,12 @@ textarea::-webkit-scrollbar {
 pre::-webkit-scrollbar {
   display: none;
 }
-#board1 {
+#moreBoards {
 	position: fixed;
-  bottom: 10px;
-  z-index: 100;
+	top: 95%;
+	z-index: 100;
 }
-#board2 {
-	position: fixed;
-  bottom: 10px;
-	left: 110px;
-  z-index: 100;
+a {
+	color: red;
+	font-weight: 500;
 }
