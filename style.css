@@ -57,7 +57,7 @@ div {
   background-image: url("stickynote.png");
   background-size: cover;
   opacity: 1;
-  z-index: 50;
+  z-index: 100;
 }
 textarea::-webkit-scrollbar {
   display: none;
@@ -68,10 +68,11 @@ pre::-webkit-scrollbar {
 #moreBoards {
 	position: fixed;
 	bottom: 20px;
-	z-index: 100;
+	z-index: 100 !important;
 	height: 10px;
 }
 a {
 	color: red;
 	font-weight: 500;
+	z-index: 300;
 }
