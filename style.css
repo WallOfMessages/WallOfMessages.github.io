@@ -8,6 +8,9 @@ html, body {
   background-size: 400px;
   padding: 0px;
 }
+.highlight {
+	background-color: #fbff00;
+}
 body {
   border: solid brown 20px;
   border-image: url("frame.jpg") 50;
