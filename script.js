@@ -37,7 +37,7 @@ http.onload = function() {
   for (let i = 0; i < response.Posts.length; i++) {
     let post = document.createElement("div")
     let text = document.createElement("pre")
-    text.disabled = true
+
     text.innerText = censor(response.Posts[i].Content)
     post.style.backgroundImage = `url('stickynote${response.Posts[i].Color}.png')`
     post.style.left = `${response.Posts[i].X}px`
@@ -146,7 +146,18 @@ document.addEventListener('keydown', (event) => {
       http.onload=function(){
       }
       http.send(JSON.stringify(response))
-      tempText.disabled = true
+			let post = document.createElement("div")
+    	let text = document.createElement("pre")
+
+    	text.innerText = censor(tempText.value)
+    	post.style.backgroundImage = `url('stickynote${colorTable[currentColorValue%colorTable.length]}.png')`
+    	post.style.left = `${finalX-210}px`
+    	post.style.top = `${finalY-170}px`
+			post.style.zIndex = 50
+   		post.style.transform = `rotate(${rotation}deg)`
+   		document.body.appendChild(post)
+    	post.appendChild(text)
+      tempPost.remove()
       tempPost = document.createElement("div")
       tempText = document.createElement("textarea")
       rotation = getRndInteger(-20,20)
