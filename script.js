@@ -119,6 +119,12 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key == "c" && tempText != document.activeElement) {
     currentColorValue = (currentColorValue+1)
+    if (showTempNote == true) {
+      tempPost.style.opacity = 1
+      updateTempNote()
+    } else {
+      tempPost.style.opacity = 0
+    }
   }
 })
 document.addEventListener('keydown', (event) => {
@@ -151,7 +157,7 @@ document.addEventListener('keydown', (event) => {
     	post.style.backgroundImage = `url('stickynote${colorTable[currentColorValue%colorTable.length]}.png')`
     	post.style.left = `${finalX-210}px`
     	post.style.top = `${finalY-170}px`
-			post.style.zIndex = 50
+		post.style.zIndex = 50
    		post.style.transform = `rotate(${rotation}deg)`
    		document.body.appendChild(post)
     	post.appendChild(text)
