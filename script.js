@@ -8,9 +8,9 @@ var lastX = 0
 var lastY = 0
 
 function censor(input) {
-	const badWords = ["fuck", "shit", "bitch", "cock", "dick", "nigga", "nigger", "ass"]
+	const badWords = ["fuck", "shit", "bitch", "cock", "dick", "nigga", "nigger", "ass", "asshole"]
 	for (let i = 0; i < badWords.length; i++) {
-		input = input.replaceAll(badWords[i], "#".repeat(badWords[i].length))
+		input = input.replaceAll(" "+badWords[i]+" ", "#".repeat(badWords[i].length))
 	}
 	return input
 }
